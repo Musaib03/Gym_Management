@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Members and Attendance</title>
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-image: url('https://wallpaperaccess.com/full/1087587.jpg'); /* Replace 'your-image-path.jpg' with the actual path to your image */
+			background-size: cover; /* Ensures the image covers the entire background */
+			background-position: center; /* Centers the image */
+			background-attachment: fixed; /* Keeps the image fixed when scrolling */
+			background-repeat: no-repeat; /* Prevents the image from repeating */
+			 color: #333;  
+		}
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #101112;
+            color: #fff;
+            padding: 10px 20px;
+        }
+        .navbar h2 {
+            margin: 0;
+        }
+        .navbar div a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .navbar div a:hover {
+            text-decoration: underline;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin: 20px 0;
+        }
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        input[type="date"] {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Gym Pro</h2>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'services' %}">Attendance</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <h1>Manage Members and Attendance</h1>
+
+    <!-- Member Management Section -->
+    <section>
+        <h2>Members</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Membership</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Member in Members %}
+                <tr>
+                    <td>{{ Member.id }}</td>
+                    <td>{{ Member.first_name }}</td>
+                    <td>{{ Member.last_name }}</td>
+                    <td>{{ Member.email }}</td>
+                    <td>{{ Member.phone }}</td>
+                    <td>{{ Member.membership.membership_type|default:"None" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Attendance Section -->
+    <section>
+        <h2>Attendance</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for Member in Members %}
+                    <tr>
+                        <td><input type="checkbox" name="attendance" value="{{ Member.id }}"></td>
+                        <td>{{ Member.id }}</td>
+                        <td>{{ Member.first_name }}</td>
+                        <td>{{ Member.last_name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Mark Attendance</button>
+        </form>
+    </section>
+</body>
+</html>
