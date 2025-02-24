@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Membership
+from .models import Membership,Member, Attendance
 from .forms import UserDetailForm
 from .models import Member
 from .forms import UserDetailForm
+from datetime import datetime
+
 
 def home_view(request):
     return render(request, 'gymapp/index.html')
@@ -23,3 +25,15 @@ def membership_form(request):
 # Success View
 def membership_success(request):
     return HttpResponse("<h1>Membership successfully registered!</h1>")
+
+def services_view(request):
+    if request.method == 'POST':
+        selected_date = request.POST.get('date')
+        attendance_ids = request.POST.getlist('attendance')
+        for member_id in attendance_ids:
+            member = Member.objects.get(id=member_id)
+            Attendance.objects.create(member=member, date=selected_date)
+        return HttpResponse("Attendance marked successfully!")
+
+    members = Member.objects.all()
+    return render(request, 'gymapp/services.html', {'Members': members})

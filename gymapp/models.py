@@ -63,11 +63,7 @@ class Class(models.Model):
 # Attendance Model
 class Attendance(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    class_instance = models.ForeignKey(Class, on_delete=models.CASCADE)
-    attendance_date = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Attendance {self.id} - {self.member}"
+    date = models.DateField(null=True, blank=True)
 
 # Equipment Model
 class Equipment(models.Model):
