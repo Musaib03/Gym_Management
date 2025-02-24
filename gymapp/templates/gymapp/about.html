@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 80;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+        .section:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .section img {
+            width: 45%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .section .description {
+            width: 45%;
+        }
+        .section .description h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            margin-top: 20px;
+        }
+        .footer span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>Gym Pro</h2>
+        <div>
+            <a href="/">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section">
+        <img src="https://img.freepik.com/premium-photo/chiseled-strength-striking-vector-silhouette-muscled-bodybuilder-black-canvas_983420-243995.jpg" alt="About Image">
+        <div class="description">
+            <h2>Who We Are</h2>
+            <p>
+                Gym Pro is a world-class fitness facility dedicated to helping individuals achieve their health and fitness goals. 
+                Whether you're looking to lose weight, build muscle, or maintain a healthy lifestyle, we've got the tools and expertise you need.
+            </p>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+		<img src="https://wallpapercave.com/wp/wp2639566.jpg" alt="Mission Image">
+        <div class="description">
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to empower people to lead healthier and more fulfilling lives. We believe in creating a welcoming 
+                and supportive environment where everyone, regardless of their fitness level, can thrive and reach their full potential.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Made with <span>♥</span> by BaveshDON</p>
+    </div>
+</body>
+</html>
