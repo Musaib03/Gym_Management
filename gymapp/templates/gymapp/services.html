@@ -9,11 +9,11 @@
 			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
-			background-image: url('https://wallpaperaccess.com/full/1087587.jpg'); /* Replace 'your-image-path.jpg' with the actual path to your image */
-			background-size: cover; /* Ensures the image covers the entire background */
-			background-position: center; /* Centers the image */
-			background-attachment: fixed; /* Keeps the image fixed when scrolling */
-			background-repeat: no-repeat; /* Prevents the image from repeating */
+			background-image: url('https://wallpaperaccess.com/full/1087587.jpg'); 
+			background-size: cover; 
+			background-position: center; 
+			background-attachment: fixed;
+			background-repeat: no-repeat; 
 			 color: #333;  
 		}
         .navbar {
@@ -37,7 +37,7 @@
             text-decoration: underline;
         }
         h1, h2 {
-            color: #333;
+            color: #fefefe;
             text-align: center;
             margin: 20px 0;
         }
@@ -52,7 +52,6 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -92,6 +91,7 @@
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #0056b3;
@@ -167,8 +167,27 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <button type="submit">Mark Attendance</button>
+            <button onclick="markAttendance()">Mark Attendance</button>
         </form>
     </section>
 </body>
+<script>
+    function markAttendance() {
+        fetch("{% url 'services' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch(error => {
+            alert("An error occurred while marking attendance.");
+            console.error(error);
+        });
+    }
+</script>
 </html>
