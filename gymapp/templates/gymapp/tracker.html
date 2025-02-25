@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout and Diet Insights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('insightsForm');
+            const formData = new FormData(form);
+
+            const response = await fetch("{% url 'track' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('resultCard').innerHTML = `
+                    <div class="card mt-4 shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Hello, ${data.name}!</h4>
+                            <p class="card-text">Age: ${data.age}</p>
+                            <p class="card-text">Weight: ${data.weight} kg</p>
+                            <h5>Workout Plan</h5>
+                            <p>${data.workout_plan}</p>
+                            <h5>Diet Plan</h5>
+                            <p>${data.diet_plan}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                alert('Error processing your request. Please try again.');
+            }
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Workout and Diet Insights</h2>
+                <form id="insightsForm" enctype="multipart/form-data" onsubmit="submitForm(event)">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Weight (kg)</label>
+                        <input type="number" class="form-control" id="weight" name="weight" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload Image</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Get Insights</button>
+                </form>
+                <div id="resultCard"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
