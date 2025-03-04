@@ -66,7 +66,7 @@
             z-index: 2;
         }
         .btn-membership {
-            background-color: #ff6f61;
+            background-color: #3e5dc1;
             color: white;
             padding: 10px 20px;
             font-size: 1rem;
@@ -77,8 +77,44 @@
             z-index: 2;
         }
         .btn-membership:hover {
-            background-color: #e55b50;
+            background-color: #76a0d8;
             text-decoration: none;
+        }
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 0;
+           
+        }
+        .slider-container {
+            display: flex;
+            animation: slide 25s linear infinite;
+            height: 90px;
+            align-items: center;
+        }
+        .slide {
+            flex: 0 0 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 10px;
+        }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            33% { transform: translateX(-100%); }
+            66% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            margin-top: 20px;
+        }
+        .footer span {
+            color: red;
         }
     </style>
 </head>
@@ -96,6 +132,17 @@
         <h1>Welcome to Gym Pro</h1>
         <p>Your journey to fitness starts here</p>
         <a href="{% url 'membership_form' %}" class="btn-membership">Add Member</a>
+    </div>
+    <div class="slider">
+        <div class="slider-container">
+            <div class="slide">"Push yourself because no one else is going to do it for you."</div>
+            <div class="slide">"Success starts with self-discipline."</div>
+            <div class="slide">"Diet, Workout, Hydrate, Repeat"</div>
+            <div class="slide">"Sweat, smile, repeat."</div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Made with <span>❤️</span> by BhaveshDon</p>
     </div>
 </body>
 </html>
