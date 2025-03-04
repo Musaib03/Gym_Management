@@ -39,9 +39,40 @@
             }
         }
     </script>
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
+    <div class="navbar">
+        <h2>Gym Pro</h2>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'services' %}">Attendance</a>
+            <a href="{% url 'track' %}">Tracker</a>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 150px;">
         <div class="card shadow-lg">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Workout and Diet Insights</h2>
