@@ -180,3 +180,50 @@ def track(request):
         })
 
     return render(request, 'gymapp/tracker.html')
+
+def workout_plan_view(request):
+    if request.method == 'POST':
+        level = request.POST.get('level')  # Get the selected level from the form
+
+        # Define workout and diet plans for each level
+        plans = {
+            'beginner': {
+                'workout': [
+                    {'day': 'Day 1', 'activity': 'Full-body stretching', 'image': 'https://www.himalayanyogaashram.com/wp-content/uploads/2021/09/Why-Stretching-Daily-Is-The-Key-To-Your-Fitness-Benefits-of-Full-Body-Stretches.jpg'},
+                    {'day': 'Day 2', 'activity': 'Cardio: 20 minutes jogging', 'image': 'https://img.freepik.com/free-photo/young-bodybuilder-running-cardio-workout-looking-gym-window_496169-2718.jpg'},
+                    {'day': 'Day 3', 'activity': 'Rest day', 'image': 'https://jooinn.com/images/relaxation-3.jpg'},
+                    {'day': 'Day 4', 'activity': 'Bodyweight exercises', 'image': 'https://www.offgridweb.com/wp-content/uploads/2015/10/Body-Weight-Exercises-thumbnail.jpg'},
+                    {'day': 'Day 5', 'activity': 'Cardio: 15 minutes cycling', 'image': 'https://i.pinimg.com/originals/74/97/3a/74973a64e97d15605ee0909eabd80758.jpg'},
+                    {'day': 'Day 6', 'activity': 'Yoga session', 'image': 'https://yogaashfield.com.au/wp-content/uploads/2020/02/yoga-for-men2.jpg'},
+                ],
+                'diet': ['Breakfast: Oatmeal', 'Lunch: Grilled chicken salad', 'Dinner: Steamed vegetables']
+            },
+            'intermediate': {
+                'workout': [
+                    {'day': 'Day 1', 'activity': 'Strength training: Upper body', 'image': 'https://builtwithscience.com/wp-content/uploads/2018/03/upper-body-workout-thumbnail.png'},
+                    {'day': 'Day 2', 'activity': 'Cardio: 30 minutes running', 'image': 'https://images.saymedia-content.com/.image/t_share/MTc1MTI3NzM2MjkyMDI1NDM5/the-different-types-of-cardio-and-their-benefits.jpg'},
+                    {'day': 'Day 3', 'activity': 'Lower body workout', 'image': 'https://th.bing.com/th/id/OIP.h0XpZGlsZsaqG-vNhE14_wHaD4?rs=1&pid=ImgDetMain'},
+                    {'day': 'Day 4', 'activity': 'HIIT session', 'image': 'https://th.bing.com/th/id/OIP.9tG-0CAnFHasAplBWY6biAHaGI?rs=1&pid=ImgDetMain'},
+                    {'day': 'Day 5', 'activity': 'Core workout', 'image': 'https://darebee.com/images/workouts/total-core-workout.jpg'},
+                    {'day': 'Day 6', 'activity': 'Yoga and recovery', 'image': 'https://centerforliving.org/wp-content/uploads/2023/09/blog-yoga-for-recovery.jpg'},
+                ],
+                'diet': ['Breakfast: Protein smoothie', 'Lunch: Quinoa and grilled fish', 'Dinner: Salad with nuts']
+            },
+            'advanced': {
+                'workout': [
+                    {'day': 'Day 1', 'activity': 'Weightlifting: Chest and arms', 'image': 'https://c.wallhere.com/photos/49/9c/men_bodybuilding_weightlifting_sport-53362.jpg!d'},
+                    {'day': 'Day 2', 'activity': 'CrossFit session', 'image': 'https://i.ytimg.com/vi/QBah01ovrWQ/maxresdefault.jpg'},
+                    {'day': 'Day 3', 'activity': 'Leg day', 'image': 'https://th.bing.com/th/id/OIP.e5QKnDgmhACvvMbl4o4ohQAAAA?rs=1&pid=ImgDetMain'},
+                    {'day': 'Day 4', 'activity': 'Endurance training', 'image': 'https://www.runladylike.com/wp-content/uploads/2014/01/5-Phases-of-training.jpg'},
+                    {'day': 'Day 5', 'activity': 'Powerlifting', 'image': 'https://wallpaperaccess.com/full/2803801.jpg'},
+                    {'day': 'Day 6', 'activity': 'Active recovery', 'image': 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/11/Active_recovery_GettyImages1265162147_Header-1024x575.jpg'},
+                ],
+                'diet': ['Breakfast: Eggs and avocado', 'Lunch: Lean beef with veggies', 'Dinner: Grilled salmon']
+            }
+        }
+
+        selected_plan = plans.get(level, {})
+        return render(request, 'gymapp/workout_plan.html', {'level': level, 'plan': selected_plan})
+
+    return render(request, 'gymapp/workout_plan.html')
+
