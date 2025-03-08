@@ -4,99 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Members and Attendance</title>
-    <style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			background-image: url('https://wallpaperaccess.com/full/1087587.jpg'); 
-			background-size: cover; 
-			background-position: center; 
-			background-attachment: fixed;
-			background-repeat: no-repeat; 
-			 color: #333;  
-		}
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #101112;
-            color: #fff;
-            padding: 10px 20px;
-        }
-        .navbar h2 {
-            margin: 0;
-        }
-        .navbar div a {
-            text-decoration: none;
-            color: #fff;
-            margin: 0 10px;
-            font-weight: bold;
-        }
-        .navbar div a:hover {
-            text-decoration: underline;
-        }
-        h1, h2 {
-            color: #fefefe;
-            text-align: center;
-            margin: 20px 0;
-        }
-        section {
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #007BFF;
-            color: #fff;
-        }
-        tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        label {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        input[type="date"] {
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/services.css' %}">
 </head>
 <body>
     <div class="navbar">
@@ -106,6 +15,7 @@
             <a href="{% url 'about' %}">About</a>
             <a href="{% url 'services' %}">Attendance</a>
             <a href="{% url 'track' %}">Tracker</a>
+            <a href="{% url 'workout_plan' %}">Workout</a>
         </div>
     </div>
 
