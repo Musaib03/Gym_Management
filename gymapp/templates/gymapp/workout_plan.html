@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/workout.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2 style="color: white;">Gym Pro</h2>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'services' %}">Attendance</a>
+            <a href="{% url 'track' %}">Tracker</a>
+            <a href="{% url 'workout_plan' %}">Workout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Select Your Fitness Level</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="level">Choose your level:</label>
+            <select name="level" id="level" required>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+            <button type="submit">View Plan</button>
+        </form>
+
+        {% if plan %}
+            <h3>{{ level|capfirst }} Workout & Diet Plan</h3>
+            <h4>Workout Plan</h4>
+            <ul>
+                {% for workout in plan.workout %}
+                    <li>
+                        <strong>{{ workout.day }}:</strong> {{ workout.activity }}<br>
+						<div class="image-container">
+							<img src="{{ workout.image }}" alt="{{ workout.activity }}">
+						</div>                  
+					</li>
+                {% endfor %}
+            </ul>
+
+            <h4>Diet Plan</h4>
+            <ul>
+                {% for meal in plan.diet %}
+                    <li>{{ meal }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
+
