@@ -4,79 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 80;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-        .section {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 50px 20px;
-            flex-wrap: wrap;
-        }
-        .section:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        .section img {
-            width: 45%;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .section .description {
-            width: 45%;
-        }
-        .section .description h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.9);
-            color: white;
-            margin-top: 20px;
-        }
-        .footer span {
-            color: red;
-        }
-    </style>
-</head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
 <body>
     <!-- Navbar -->
     <div class="navbar">
-        <h2>Gym Pro</h2>
+        <h2 style="color: white;">Gym Pro</h2>
         <div>
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'about' %}">About</a>
             <a href="{% url 'services' %}">Attendance</a>
             <a href="{% url 'track' %}">Tracker</a>
+            <a href="{% url 'workout_plan' %}">Workout</a>
         </div>
     </div>
 
