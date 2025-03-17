@@ -60,6 +60,10 @@ import tensorflow_hub as hub
 # Load the TensorFlow Hub model
 MODEL_URL = "https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/classification/5"
 model_layer = hub.KerasLayer(MODEL_URL, input_shape=(224, 224, 3), trainable=False)
+def simulate_body_structure(predicted_label):
+    # Simulate body structure based on predicted label
+    simulated_categories = ['lean', 'muscular', 'overweight']
+    return simulated_categories[predicted_label % len(simulated_categories)]
 
 def track(request):
     if request.method == 'POST':
@@ -85,7 +89,8 @@ def track(request):
         # Predict using the model layer
         try:
             predictions = model_layer(img_array).numpy()  # Use the KerasLayer directly
-            predicted_label = np.argmax(predictions)  # Get the index of the highest probability
+            predicted_label = np.argmax(predictions)
+            body_structure = simulate_body_structure(predicted_label)
         except Exception as e:
             return JsonResponse({'error': f'Error during prediction: {str(e)}'}, status=500)
 
@@ -95,18 +100,15 @@ def track(request):
         # Generate workout and diet plans based on predicted_label
         # Map ImageNet predictions to custom categories
         label_to_category = {
-            range(0, 100): 0,   # Example mapping: ImageNet classes 0-99 → Category 0
-            range(100, 200): 1, # Example mapping: ImageNet classes 100-199 → Category 1
-            range(200, 300): 2, # Example mapping: ImageNet classes 200-299 → Category 2
-            # Add more mappings as needed
+            0: 'lean',    
+            1: 'muscular', 
+            2: 'overweight', 
         }
 
         # Function to map predicted label to category
         def map_label_to_category(label):
-            for label_range, category in label_to_category.items():
-                if label in label_range:
-                    return category
-            return None  # Default fallback if no category matches
+            return label_to_category.get(label, 'default')
+        # Default fallback if no category matches
 
         # Generate insights based on category
         category = map_label_to_category(predicted_label)
